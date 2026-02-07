@@ -1,0 +1,170 @@
+<h2>Create a story</h2>
+<form [formGroup]="storyForm" xmlns="http://www.w3.org/1999/html" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input id="storyTitle" class="form-control" type="text" formControlName="title"/>
+        <label for="storyTitle">Title</label>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-floating mb-3">
+        <input id="storyAuthor" class="form-control" type="text" formControlName="author"/>
+        <label for="storyAuthor">Author</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-floating mb-3">
+        <input id="storyCopyright" class="form-control" type="text" formControlName="copyright"/>
+        <label for="storyCopyright">Copyright</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="storyDraft" checked>
+    <label class="form-check-label" for="storyDraft">Mark story as a draft?</label>
+  </div>
+
+  <div formArrayName="pages" class="pages-array-form-name">
+
+    <div class="row">
+      <div class="col-sm-2">
+        <h3>Pages</h3>
+      </div>
+      <div class="col-sm">
+        Add new pages to your story here
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-info" (click)="addPage()" [hidden]="pages.length > 0">
+          <mat-icon aria-hidden="false" aria-label="add a new page to the story" fontIcon="add"></mat-icon>
+          add first page
+        </button>
+      </div>
+    </div>
+
+
+    @for (page of pages.controls; track page; let i = $index) {
+      <div class="page-group" id="page-{{ i }}" [formGroupName]="i">
+
+        <div class="row">
+          <div class="col-sm-1">
+            <h4 class="text-center">Page<br>{{ page.get('id')?.value }}</h4>
+
+            <div class="bottom">
+              <button type="button" class="btn btn-danger page-remove-button" (click)="removePage(i)">
+                <mat-icon aria-hidden="false" aria-label="remove page {{ page.get('id')?.value }}"
+                          fontIcon="remove"></mat-icon>
+              </button>
+              <br>
+              <button type="button" class="btn btn-info page-add-button" (click)="addPage()">
+                <mat-icon aria-hidden="false" aria-label="add a new page to the story" fontIcon="add"></mat-icon>
+              </button>
+            </div>
+
+          </div>
+          <div class="col-sm">
+            <div class="row">
+              <div class="col-md-2">
+                <div class="form-floating mb-3">
+                  <input id="page-id-{{ i }}" class="form-control" type="number" formControlName="id"/>
+                  <label for="page-id-{{ i }}">Page Number</label>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="form-floating mb-3">
+                  <input id="page-title-{{ i }}" class="form-control" type="text" formControlName="title"/>
+                  <label for="page-title-{{ i }}">Title</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+          <textarea class="form-control" placeholder="Page text" id="page-text-{{ i }}"
+                    style="height: 100px" formControlName="pageText"></textarea>
+              <label for="page-text-{{ i }}">Page text</label>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-3 align-middle">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="page-start-{{ i }}"
+                         formControlName="start"/>
+                  <label class="form-check-label" for="page-start-{{ i }}">Is this the first page?</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch"
+                         id="page-end-{{ i }}" formControlName="end"/>
+                  <label class="form-check-label" for="page-end-{{ i }}">Is this an ending page?</label>
+                </div>
+              </div>
+            </div>
+
+
+            <br>
+            <div formArrayName="paths" class="paths-array-form-name">
+
+              <div class="row">
+                <div class="col-sm-2">
+                  <h4>Paths</h4>
+                </div>
+                <div class="col-sm">
+                  Add "go to page x" links here.
+                </div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-outline-dark" (click)="addPath(i)"
+                          [hidden]="getPaths(i).length > 0">
+                    <mat-icon aria-hidden="false" aria-label="add a new path to page {{ page.get('id')?.value }}"
+                              fontIcon="add"></mat-icon>
+                    add first path
+                  </button>
+                </div>
+              </div>
+
+              @for (path of getPaths(i).controls; track path; let j = $index) {
+                <div class="path-group" id="path-{{ j }}" [formGroupName]="j">
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <div class="form-floating mb-3">
+                        <input id="path-goto-{{ j }}" class="form-control" type="number" formControlName="goToPage"/>
+                        <label for="path-goto-{{ j }}">Go To Page</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1">
+                      <button type="button" class="btn btn-outline-info path-remove-button">
+                        <a (click)="scrollToElement(`page-${path.get('goToPage')?.value}`)">
+                          <mat-icon aria-hidden="false" aria-label="go to page {{ path.get('goToPage')?.value }}"
+                                    fontIcon="directions"></mat-icon>
+                        </a>
+                      </button>
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-floating mb-3">
+                        <input id="path-text-{{ j }}" class="form-control" type="text" formControlName="text"/>
+                        <label for="path-text-{{ j }}">Text</label>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                      <button type="button" class="btn btn-outline-danger path-remove-button"
+                              (click)="removePath(i, j)">
+                        <mat-icon aria-hidden="false" aria-label="remove this path" fontIcon="remove"></mat-icon>
+                      </button>
+                      <button type="button" class="btn btn-outline-dark path-add-button" (click)="addPath(i)">
+                        <mat-icon aria-hidden="false" aria-label="add another path to page {{ page.get('id')?.value }}"
+                                  fontIcon="add"></mat-icon>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <!--  <button type="submit" class="btn btn-primary" [disabled]="!storyForm.valid">Submit</button>-->
+</form>
+

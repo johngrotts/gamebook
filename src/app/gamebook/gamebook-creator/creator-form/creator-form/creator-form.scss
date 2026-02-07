@@ -1,0 +1,29 @@
+.pages-array-form-name {
+  margin: 5px;
+}
+.page-group, .path-group {
+  padding: 5px;
+}
+.pages-array-form-name .page-group:nth-child(odd) {
+  background-color: #f4f4f4;
+}
+.pages-array-form-name .page-group:nth-child(even) {
+  background-color: #ffffff;
+}
+.page-remove-button, .page-add-button {
+  font-size: smaller;
+}
+
+.paths-array-form-name {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.path-remove-button, .path-add-button {
+  font-size: smaller;
+}
+.paths-array-form-name .path-group:nth-child(odd) {
+  background-color: #fffff066;
+}
+.paths-array-form-name .path-group:nth-child(even) {
+  background-color: #f0ffff66;
+}

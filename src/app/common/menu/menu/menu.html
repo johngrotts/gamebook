@@ -1,0 +1,21 @@
+<button matButton type="button" class="btn btn-light" [matMenuTriggerFor]="menu">
+  <mat-icon aria-hidden="false" aria-label="Menu navigation" fontIcon="menu"></mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  @for (route of routes; track route) {
+    <button mat-menu-item class="btn btn-link" routerLink="/{{ route.path }}">{{ route.path }}</button><br>
+  }
+</mat-menu>
+
+
+<!--<ul class="nav nav-pills">-->
+<!--  <li class="nav-item">-->
+<!--    <a class="nav-link" aria-current="page" href="#">Search stories</a>-->
+<!--  </li>-->
+<!--  <li class="nav-item dropdown">-->
+<!--    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Creator</a>-->
+<!--    <ul class="dropdown-menu">-->
+<!--      <li><a class="dropdown-item" routerLink="/creator">Story creator</a></li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<!--</ul>-->

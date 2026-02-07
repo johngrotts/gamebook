@@ -1,0 +1,84 @@
+{
+  "title": "Simple Story 1",
+  "author": "Me",
+  "copyright": "2026",
+  "draft": false,
+  "pages": [
+    {
+      "id": 0,
+      "title": "page 0",
+      "start": true,
+      "pageText": "page text 0",
+      "paths": [
+        {"id": 0, "text": "go to 1", "goToPage": 1},
+        {"id": 1, "text": "go to 2", "goToPage": 2},
+        {"id": 1, "text": "go to 3", "goToPage": 3}
+
+      ]
+    },
+    {
+      "id": 1,
+      "title": "page 1",
+      "pageText": "page text 1",
+      "paths": [
+        {"id": 0, "text": "go to 2", "goToPage": 2},
+        {"id": 1, "text": "go to 3", "goToPage": 3},
+        {"id": 1, "text": "go to 2", "goToPage": 5}
+      ]
+    },
+    {
+      "id": 2,
+      "title": "page 2",
+      "pageText": "page text 2",
+      "paths": [
+        {"id": 0, "text": "go to 3", "goToPage": 3},
+        {"id": 1, "text": "go to 4", "goToPage": 4}
+      ]
+    },
+    {
+      "id": 3,
+      "title": "page 3",
+      "pageText": "page text 3",
+      "paths": [
+        {"id": 0, "text": "go to 1", "goToPage": 4},
+        {"id": 1, "text": "go to 2", "goToPage": 5}
+      ]
+    },
+    {
+      "id": 4,
+      "title": "page 4",
+      "pageText": "page text 4",
+      "paths": [
+        {"id": 0, "text": "go to 1", "goToPage": 5},
+        {"id": 1, "text": "go to 2", "goToPage": 6}
+      ]
+    },
+    {
+      "id": 5,
+      "title": "page 5",
+      "pageText": "page text 5",
+      "end": true
+    },
+    {
+      "id": 6,
+      "title": "page 6",
+      "pageText": "page text 6",
+      "paths": [
+        {"id": 0, "text": "go to 1", "goToPage": 7},
+        {"id": 1, "text": "go to 2", "goToPage": 8}
+      ]
+    },
+    {
+      "id": 7,
+      "title": "page 7",
+      "pageText": "page text 7",
+      "end": true
+    },
+    {
+      "id": 8,
+      "title": "page 8",
+      "pageText": "page text 8",
+      "end": true
+    }
+  ]
+}
