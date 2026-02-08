@@ -1,8 +1,48 @@
 <h2>Upload File</h2>
 <div class="container">
-  <div class="row">
-    <div class="col-sm">
-
+  <form [formGroup]="storyUploadForm" (ngSubmit)="onSubmit()">
+    You can either upload an existing story json, or copy the json into the box below.<br>
+    <div class="row">
+      <div class="col-sm-1">
+        <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+        <button type="button" class="btn btn-outline-info upload-story-json-button" (click)="fileInput.click()">
+          <mat-icon aria-hidden="false" aria-label="upload a story json" fontIcon="upload_file"></mat-icon>
+        </button>
+      </div>
+      <div class="col-sm align-content-center">
+        @if (selectedFile) {
+          Selected file: {{ selectedFile.name }}
+        }
+      </div>
+      <div class="col-sm">
+        @if (selectedFile) {
+          <button type="button" class="btn btn-outline-danger clear-story-json-button" (click)="clearFile()">
+            <mat-icon aria-hidden="false" aria-label="clear story json file" fontIcon="delete_outline"></mat-icon>
+          </button>
+        }
+      </div>
     </div>
-  </div>
+    <br>
+    <div class="row">
+      <div class="col">
+        <div class="form-floating mb-3">
+          <textarea class="form-control" placeholder="Story in JSON format" id="jsonStory"
+                    style="height: 200px" formControlName="jsonStory"></textarea>
+          <label for="jsonStory">Story JSON</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="col-sm-2 offset-sm-8 text-align-right">
+      <button type="submit" class="btn btn-danger" (click)="clearJsonBox()">
+        <mat-icon aria-hidden="false" aria-label="clear json textbox" fontIcon="clear"></mat-icon>
+      </button>
+    </div>
+    </div>
+
+
+  </form>
 </div>
